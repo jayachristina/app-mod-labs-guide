@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Refactor :: Application Modernization Labs Guide</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/app-mod-labs-guide/4-refactor.html">
+    <link rel="prev" href="3-analyze.html#package">
+    <link rel="next" href="5-rehost.html#deploy">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/NewRHDFullLogo_4-color_white-wordmark.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-scholars.github.io/course-template">Application Modernization Labs Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="app-mod-labs-guide" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="1-introduction.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">2. Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="3-analyze.html#package">3. Analyze</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#deploy">4. Refactor</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="5-rehost.html#deploy">5. Rehost</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="6-deploy-to-kubernetes.html#deploy">5. Deploy to Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="7-enhance-apps.html#deploy">7. Enhance apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="8-summary.html#deploy">8. Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="1-introduction.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="1-introduction.html">Application Modernization Labs Guide</a></li>
+    <li><a href="#deploy">4. Refactor</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/app-mod-labs-guide/edit/master/documentation/modules/ROOT/pages/4-refactor.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Refactor</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this step you will modernize the customers application to fix the analyzed issues (e.g. <em>Hard coded IP address</em>).</p>
+</div>
+<div class="paragraph">
+<p>Open a new browser to access the VSCode server that is provided from the e-mail. Use the following credential.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Password: <code>password</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode-server-login.png" alt="vscode-server-login">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_explore_the_migration_issues"><a class="anchor" href="#_explore_the_migration_issues"></a>Explore the Migration issues</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Go to <code>customers-tomcat-legacy</code> project. Then, open <code>PersistenceConfig.java</code> file in <code>src/main/java/io/konveyor/demo/ordermanagement/config</code> directory.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/persistence-class.png" alt="persistence-class">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_understand_the_solution"><a class="anchor" href="#_understand_the_solution"></a>Understand the Solution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We already have the solution how to fix the migration issues. Go to <code>customers-tomcat-ocp</code> project. Then, open <code>PersistenceConfig.java</code> file in <code>src/main/java/io/konveyor/demo/ordermanagement/config</code> directory.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/persistence-class-ocp.png" alt="persistence-class-ocp">
+</div>
+</div>
+<div class="paragraph">
+<p>You can compare the code in <code>dataSource()</code> method how to configure the datastore values.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>AS-IS</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+public DataSource dataSource() {
+    ApplicationConfiguration config = new ApplicationConfiguration();
+    final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName(config.getProperty("jdbc.driverClassName"));
+    dataSource.setUrl(config.getProperty("jdbc.url"));
+    dataSource.setUsername(config.getProperty("jdbc.user"));
+    dataSource.setPassword(config.getProperty("jdbc.password"));
+
+    return dataSource;
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>TO-BE</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+public DataSource dataSource() {
+    final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+    dataSource.setUrl(env.getProperty("jdbc.url"));
+    dataSource.setUsername(env.getProperty("jdbc.user"));
+    dataSource.setPassword(env.getProperty("jdbc.password"));
+
+    return dataSource;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>➡️ Next section: <a href="./5-rehost.adoc">5 - Rehost</a></p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="3-analyze.html#package">3. Analyze</a></span>
+  <span class="next"><a href="5-rehost.html#deploy">5. Rehost</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

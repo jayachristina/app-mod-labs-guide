@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Assessment :: Application Modernization Labs Guide</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/app-mod-labs-guide/2-assessment.html">
+    <link rel="prev" href="1-introduction.html">
+    <link rel="next" href="3-analyze.html#package">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/NewRHDFullLogo_4-color_white-wordmark.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-scholars.github.io/course-template">Application Modernization Labs Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="app-mod-labs-guide" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="1-introduction.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">2. Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="3-analyze.html#package">3. Analyze</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="4-refactor.html#deploy">4. Refactor</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="5-rehost.html#deploy">5. Rehost</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="6-deploy-to-kubernetes.html#deploy">5. Deploy to Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="7-enhance-apps.html#deploy">7. Enhance apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="8-summary.html#deploy">8. Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="1-introduction.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="1-introduction.html">Application Modernization Labs Guide</a></li>
+    <li><a href="2-assessment.html">2. Assessment</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/app-mod-labs-guide/edit/master/documentation/modules/ROOT/pages/2-assessment.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Assessment</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>To start the assessment of the existing applications we will use the <a href="https://www.konveyor.io/tools/tackle" target="_blank" rel="noopener">Tackle</a> Application Assessment tool in the <a href="https://www.konveyor.io" target="_blank" rel="noopener">Konveyor</a> community to move our applications. We will use <em>Tackle</em> to assess the <code>Customers</code> service based on the <em>Tomcat</em> server on Red Hat Virtualization.</p>
+</div>
+<div class="paragraph">
+<p>Open a new browser to access the Tackle web console that is provided from the e-mail. Use the following credential.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Username or email: <code>tackle</code></p>
+</li>
+<li>
+<p>Password: <code>password</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tackle-login.png" alt="Tackle Login">
+</div>
+</div>
+<div class="paragraph">
+<p>You will see existing application inventories such as <strong>Customers</strong>, <strong>Orders</strong>, and <strong>RetailFrontend</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/application-inventory.png" alt="application inventory">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Tackle Application Inventory</strong> is the vehicle which selects applications for assessment by <a href="https://github.com/konveyor/tackle-pathfinder" target="_blank" rel="noopener">Pathfinder</a> and analysis by <a href="https://github.com/windup/" target="_blank" rel="noopener">windup</a>. It provides users four main functions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Maintain a portfolio of applications.</p>
+</li>
+<li>
+<p>Link applications to the business services they support.</p>
+</li>
+<li>
+<p>Define interdependencies.</p>
+</li>
+<li>
+<p>Add metadata using an extensible tagging model to describe and categorize applications in multiple dimensions.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Tackle Pathfinder</strong> is an interactive questionnaire based tool that assesses the suitability of applications for modernization in order to deploy them into containers on an enterprise Kubernetes platform. The tool output includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Application’s suitability for Kubernetes</p>
+</li>
+<li>
+<p>Associated risks</p>
+</li>
+<li>
+<p>Adoption plan with the applications’ prioritization, business criticality and dependencies.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_controls"><a class="anchor" href="#_controls"></a>Controls</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/konveyor/tackle-controls" target="_blank" rel="noopener">Tackle Controls</a> are a collection of entities that add value to Application Inventory and the Pathfinder assessment. They comprise <em>business services</em>, <em>stakeholders</em>, <em>stakeholder groups</em>, <em>job functions</em>, <em>tag types</em>, and <em>tags</em>.</p>
+</div>
+<div class="sect2">
+<h3 id="_stakeholders"><a class="anchor" href="#_stakeholders"></a>Stakeholders</h3>
+<div class="paragraph">
+<p>Go to <code>Controls</code> on the left menu and you will existing <em>stakeholders</em> such as <strong>Hank Scorpio</strong> and <strong>Homer Simpson</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tackle-control-stakeholder.png" alt="stakeholders">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also find the existing <em>stakeholder groups</em> such as <strong>IT Management</strong> and <strong>Retail Management</strong> for the application assessment.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/stakeholder-groups.png" alt="stakeholder-groups">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_business_services"><a class="anchor" href="#_business_services"></a>Business services</h3>
+<div class="paragraph">
+<p>Applications can be classified and grouped in multiple ways such as <strong>business service</strong>. Let’s create a new business service for the legacy <code>Retail</code> applications.</p>
+</div>
+<div class="paragraph">
+<p>Go to <code>Controls</code> on the left menu and click on <em>Business services</em> tab. You will existing <em>business services</em> such as <strong>Finance and HR</strong> and <strong>Retail</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tackle-control-business-service.png" alt="business service">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_application_inventory"><a class="anchor" href="#_application_inventory"></a>Application inventory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let’s focus on the legacy application. We have added tags that represent its technology, like java, Tomcat and Oracle, and decided to add a custom tag type that allows us to identify which custom architecture libraries are used by each application.</p>
+</div>
+<div class="sect2">
+<h3 id="_update_the_customers_application_inventory"><a class="anchor" href="#_update_the_customers_application_inventory"></a>Update the Customers Application Inventory</h3>
+<div class="paragraph">
+<p>Go to <code>Application inventory</code> on the left menu and click on <code>pencil</code> icon for the customers inventory.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-inventory-landing.png" alt="app-inventory-landing">
+</div>
+</div>
+<div class="paragraph">
+<p>Fill in the following fields. Then, click on <code>Save</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Business service: <code>Retail</code></p>
+</li>
+<li>
+<p>Tags: <code>Java</code>, <code>Tomcat</code>, <code>RHEL 8</code>, <code>Oracle</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/update-new-app-inventory.png" alt="update-new-app-inventory">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_expand_the_legacy_customers_application"><a class="anchor" href="#_expand_the_legacy_customers_application"></a>Expand the Legacy Customers Application</h3>
+<div class="paragraph">
+<p>Since the legacy application comes from a traditional platform and we are aware about some problems with the configuration model, let’s focus on this one for the assessment.</p>
+</div>
+<div class="paragraph">
+<p>To start the assessment, select the customers application. Then, click on <code>Assess</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-inventory-access.png" alt="app-inventory-access">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You might see <code>This application has already been assessed. Do you want to continue?</code> message, then click on <code>Continue</code> to make sure that the following answers are selected for each step.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>First step will be to select the stakeholders (<em>e.g. Homer Simpson</em>) involved with the assessment. Leave the default values.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/select-stakeholder.png" alt="select-stakeholder">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you’re happy with the stakeholders, click on <code>Next</code>.</p>
+</div>
+<div class="paragraph">
+<p>The assessment is driven by a questionnaire, and aims to determine the suitability for containerization for a given application. It covers all the different areas of the application landscape, including the technology, application lifecycle management, and operations.</p>
+</div>
+<div class="paragraph">
+<p>These questions allow the tool to identify potential risks that might prevent the application from running in containers or would require any kind of adjustment for that.</p>
+</div>
+<div class="sect3">
+<h4 id="_application_details"><a class="anchor" href="#_application_details"></a>Application details</h4>
+<div class="paragraph">
+<p>Choose the following answers for each question.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Does the application development team understand and actively develop the application?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Actively developed, SME knowledge is available</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How is the application supported in production?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Separate internal support team, separate from the development team, with little interaction between the team</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How much time passes from when code is committed until the application is deployed to production?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1-7 days</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How often is the application deployed to production?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Weekly</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What is the application&#8217;s mean time to recover (MTTR) from failure in a production environment?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Less than 1 hour</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Does the application have legal and/or licensing requirements?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>None</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Which model best describes the application architecture?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Resilient monolith (examples: retries, circuit breakers)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-details.png" alt="app-details">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_application_dependencies"><a class="anchor" href="#_application_dependencies"></a>Application dependencies</h4>
+<div class="paragraph">
+<p>Choose the following answers for each question.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Does the application require specific hardware?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Requires CPU that is supported by Red Hat</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What operating system does the application require?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard Linux distribution</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Does the vendor provide support for a third-party component running in a container?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No third-party components required</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Incoming/northbound dependencies</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No incoming/northbound dependencies</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Outgoing/southbound dependencies</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No outgoing/southbound dependencies</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-dependencies.png" alt="app-dependencies">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_application_architecture"><a class="anchor" href="#_application_architecture"></a>Application architecture</h4>
+<div class="paragraph">
+<p>Choose the following answers for each question.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How resilient is the application? How well does it recover from outages and restarts?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Application employs resilient architecture patterns (examples: circuit breakers, retry mechanisms)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How does the external world communicate with the application?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP/HTTPS</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How does the application manage its internal state?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Stateless or ephemeral container storage</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How does the application handle service discovery?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Uses technologies that are not compatible with Kubernetes (examples: hardcoded IP addresses, custom cluster manager)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How is the application clustering managed?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No cluster management required</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-architecture.png" alt="app-architecture">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_application_observability"><a class="anchor" href="#_application_observability"></a>Application observability</h4>
+<div class="paragraph">
+<p>Choose the following answers for each question.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How does the application use logging and how are the logs accessed?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Logs are forwarded to an external logging system (example: Splunk)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Does the application provide metrics?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Metrics exposed using a third-party solution (examples: Dynatrace, AppDynamics)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How easy is it to determine the application&#8217;s health and readiness to handle traffic?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dedicated, independent liveness and readiness endpoints</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>What best describes the application&#8217;s runtime characteristics?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Constant traffic with predictable CPU and memory usage</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How long does it take the application to be ready to handle traffic?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>10-60 seconds</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Next</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-observability.png" alt="app-observability">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_application_cross_cutting_concerns"><a class="anchor" href="#_application_cross_cutting_concerns"></a>Application cross-cutting concerns</h4>
+<div class="paragraph">
+<p>Choose the following answers for each question.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How is the application tested?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Highly repeatable automated testing (examples: unit, integration, smoke tests) before deploying to production; modern test practices are followed</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How is the application configured?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Multiple configuration files in multiple file system locations</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How does the application acquire security keys or certificates?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Not required</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How is the application deployed?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Automated deployment with a full CI/CD pipeline, minimal intervention for promotion through pipeline stages</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Where is the application deployed?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Virtual machine (examples: Red Hat Virtualization, VMware)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>How mature is the containerization process, if any?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Some experience with containers but not yet fully defined</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Save and review</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/app-cross-cutting-concerns.png" alt="app-cross-cutting-concerns">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_application_review"><a class="anchor" href="#_application_review"></a>Application Review</h3>
+<div class="paragraph">
+<p>You will be presented with the review screen. It allows you to find out which risks were identified during the assessment and decide which migration strategy to follow based on that.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/review.png" alt="review">
+</div>
+</div>
+<div class="paragraph">
+<p>Scroll down the screen to view the risks. This legacy application uses a discovery mechanism that is not cloud-friendly, which makes sense since it comes from a classic platform and accesses a database through a static IP.</p>
+</div>
+<div class="paragraph">
+<p>Now that we know there will be some changes required in the source code to adapt the application, we can decide that the strategy will be <code>Refactor</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Proposed action: <code>Refactor</code></p>
+</li>
+<li>
+<p>Effort estimate: <code>Small</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Since this is a key application in the architecture, we’re going to set the criticality and priority to <code>10</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Business criticality: <code>10</code></p>
+</li>
+<li>
+<p>Work priority: <code>9</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click on <code>Submit Review</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/submit-review.png" alt="submit-review">
+</div>
+</div>
+<div class="paragraph">
+<p>Now that we’ve completed the initial assessment we can see that we will need to dig deeper into the legacy customers application to check what the problem is with the config library and how to remove it. To do this we will use the <a href="https://developers.redhat.com/products/mta/overview" target="_blank" rel="noopener">Migration Toolkit for Applications</a> in the next section.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/complete-review.png" alt="complete-review">
+</div>
+</div>
+<div class="paragraph">
+<p>Go to <code>Report</code> on the left menu. Then filter the report by <code>Retail</code> business service and you will find out the report details such as <em>Current landscape</em>, <em>Suggested adoption plan</em>, and <em>Identified risks</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/report-review.png" alt="report-review">
+</div>
+</div>
+<div class="paragraph">
+<p>➡️ Next section: <a href="./3-analyze.adoc">3 - Analyze</a></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="1-introduction.html">1. Introduction</a></span>
+  <span class="next"><a href="3-analyze.html#package">3. Analyze</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Deploy to Kubernetes :: Application Modernization Labs Guide</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/app-mod-labs-guide/6-deploy-to-kubernetes.html">
+    <link rel="prev" href="5-rehost.html#deploy">
+    <link rel="next" href="7-enhance-apps.html#deploy">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/NewRHDFullLogo_4-color_white-wordmark.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-scholars.github.io/course-template">Application Modernization Labs Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="app-mod-labs-guide" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="1-introduction.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="1-introduction.html">1. Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="2-assessment.html">2. Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="3-analyze.html#package">3. Analyze</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="4-refactor.html#deploy">4. Refactor</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="5-rehost.html#deploy">5. Rehost</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="#deploy">5. Deploy to Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="7-enhance-apps.html#deploy">7. Enhance apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="8-summary.html#deploy">8. Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="1-introduction.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="1-introduction.html">Application Modernization Labs Guide</a></li>
+    <li><a href="#deploy">5. Deploy to Kubernetes</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/jayachristina/app-mod-labs-guide/edit/master/documentation/modules/ROOT/pages/6-deploy-to-kubernetes.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Deploy to Kubernetes</h1>
+<div class="sect1">
+<h2 id="_use_openshift_pipelines_to_build_and_deploy_the_modernized_customer_application"><a class="anchor" href="#_use_openshift_pipelines_to_build_and_deploy_the_modernized_customer_application"></a>Use OpenShift Pipelines to build and deploy the modernized customer application.</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_change_customer_application_to_connect_to_the_migrated_vm_on_the_cluster"><a class="anchor" href="#_change_customer_application_to_connect_to_the_migrated_vm_on_the_cluster"></a>Change Customer Application to connect to the migrated VM on the cluster</h3>
+<div class="paragraph">
+<p>The existing customer pod connects to the VM running in RHV. Unless you started the VM again in RHV this application now has no database. But since we migrated the VM over to OpenShift we need to tell the application to connect to the VM on OpenShift instead.</p>
+</div>
+<div class="paragraph">
+<p>You will need to change source code in order to point to the VM.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a web browser navigate to the Visual Studio Code window using the URL and password from your welcome e-mail.</p>
+</li>
+<li>
+<p>Navigate to the file <code>appmod-enablement / customer-tomcat-gitops / helm / secret / persistence.properties</code></p>
+</li>
+<li>
+<p>Change the <strong>jdbc.url</strong> to use the service name for your VM on OpenShift. It should look somewhat like this:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">jdbc.url=jdbc:oracle:thin:@oracle-wkama:1521/xepdb1</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file.</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Switch to the Source Control section in VSCode, commit and push the change.
+(you may need to push from the Terminal. It will prompt for user (lab-user) and password (openshift))</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_start_an_openshift_pipeline_run"><a class="anchor" href="#_start_an_openshift_pipeline_run"></a>Start an OpenShift Pipeline run</h3>
+<div class="paragraph">
+<p>In the future we will have a trigger and event listener on the pipeline. But for now you have to kick off the pipeline run manually</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log into OpenShift Web Console</p>
+</li>
+<li>
+<p>Navigate to <strong>Pipelines</strong> &#8594; <strong>Pipelines</strong></p>
+</li>
+<li>
+<p>Click the dots menu to the right of the pipeline <code>customers-deployment-pipeline</code> and select <strong>Start last run</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>➡️ Next section: <a href="./7-enhance-apps.adoc">7 - Enhance Applications with Managed Services</a></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="5-rehost.html#deploy">5. Rehost</a></span>
+  <span class="next"><a href="7-enhance-apps.html#deploy">7. Enhance apps</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
