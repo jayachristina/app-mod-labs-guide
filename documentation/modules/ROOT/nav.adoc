@@ -1,7 +1,15 @@
-* xref:01-setup.adoc[1. Setup]
-** xref:01-setup.adoc#prerequisite[Prerequisites]
-** xref:01-setup.adoc#minikube[Setup Minikube]
+* xref:1-introduction.adoc[1. Introduction]
 
-* xref:02-deploy.adoc[2. Deploy Service]
-** xref:02-deploy.adoc#package[Build Service]
-** xref:02-deploy.adoc#deploy[Deploy Dervice]
+* xref:2-assessment.adoc[2. Assessment]
+
+* xref:3-analyze.adoc#package[3. Analyze]
+
+* xref:4-refactor.adoc#deploy[4. Refactor]
+
+* xref:5-rehost.adoc#deploy[5. Rehost]
+
+* xref:6-deploy-to-kubernetes.adoc#deploy[5. Deploy to Kubernetes]
+
+* xref:7-enhance-apps.adoc#deploy[7. Enhance apps]
+
+* xref:8-summary.adoc#deploy[8. Summary]

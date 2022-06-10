@@ -1,7 +1,7 @@
-name: template-tutorial
-title: Template Tutorial
+name: app-mod-labs-guide
+title: Application Modernization Labs Guide
 version: master
 nav:
   - modules/ROOT/nav.adoc
 
-start_page: ROOT:index.adoc
+start_page: ROOT:1-introduction.adoc
